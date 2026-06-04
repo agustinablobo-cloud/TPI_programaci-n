@@ -3,28 +3,37 @@
 # Programacion 1 - UTN
 # ============================================
 
+#Libreria para manejar archivos CSV
 import csv
 
 # --------------------------------------------
 # FUNCION 1: Cargar paises desde el CSV
 # --------------------------------------------
 def cargar_paises(nombre_archivo):
+
+    #Lista donde se guardan todos los paises
     paises = []
 
     try:
+        #Se abre el archivo CSV en modo lectura
         with open(nombre_archivo, "r", encoding="utf-8") as archivo:
+
+            #DictReader convierte cada fila en un diccionario
             lector = csv.DictReader(archivo, delimiter=";")
         
-
+            #Recorre cada fila del archivo
             for fila in lector:
-            
+                
+                #Se crea un diccionario por pais
                 pais = {
                     "nombre":     fila["nombre"],
+                    #Convierte a entero
                     "poblacion":  int(fila["poblacion"]),
                     "superficie": int(fila["superficie"]),
                     "continente": fila["continente"]
                 }
                 
+                #Agrega el pais a la lista
                 paises.append(pais)     
 
     except FileNotFoundError:
@@ -39,6 +48,7 @@ def cargar_paises(nombre_archivo):
     except Exception as e:
         print("Ocurrió el siguiente error: ", type(e).__name__ )
 
+    #Devuelve la lista de paises cargados
     return paises
 
 
@@ -48,12 +58,15 @@ def cargar_paises(nombre_archivo):
 
 def guardar_paises(nombre_archivo, paises):
 
+    #Se abre el archivo en modo escritura (sobrescribe el archivo)
     with open(nombre_archivo, "w", newline="") as archivo:
        
        escritor = csv.writer(archivo)
 
+        #Se escribe encabezados
        escritor.writerow(["nombre", "poblacion", "superficie", "continente"])
 
+        #Escribe cada pais como una fila
        for pais in paises:
           escritor.writerow([
              pais["nombre"],
@@ -67,6 +80,7 @@ def guardar_paises(nombre_archivo, paises):
 
 def agregar_pais(paises):
     
+    #Validación del nombre
     while True:
        try:
           
@@ -74,7 +88,8 @@ def agregar_pais(paises):
 
             if not nombre:
                 raise ValueError("El nombre no puede estar vacio")
-        
+
+            #Verifica duplicados
             for pais in paises:
              if pais["nombre"].lower() == nombre.lower():
                 raise ValueError("El pais ya existe")
@@ -84,6 +99,7 @@ def agregar_pais(paises):
        except ValueError as e:
           print(e)
 
+    #Validación población
     while True:
        try:
           poblacion = input("Ingresa la poblacion: ")
@@ -104,7 +120,7 @@ def agregar_pais(paises):
        except ValueError as e:
           print(e)
 
-
+    #Validación superficie
     while True:
        try:
           superficie = input("Ingresa la superficie en km²: " )
@@ -125,7 +141,7 @@ def agregar_pais(paises):
        except ValueError as e:
           print(e)
        
-
+    #Validación continente
     while True:
        try:
             continente = input("Ingresa el continente: ").strip()
@@ -139,6 +155,7 @@ def agregar_pais(paises):
        except ValueError as e:
           print(e)
 
+    #Se crea el nuevo pais
     nuevo_pais = {
         "nombre": nombre,
         "poblacion": poblacion_a_cargar,
@@ -146,8 +163,10 @@ def agregar_pais(paises):
         "continente": continente
     }
 
+    #El nuevo pais se agrega a la lista
     paises.append(nuevo_pais)
 
+    #Se guarda en el CSV
     guardar_paises("paises.csv", paises)
 
     print("Pais agregado correctamente")
@@ -159,6 +178,7 @@ def agregar_pais(paises):
 
 def actualizar_pais(paises):
 
+    #Busca el pais por nombre
     while True:
        try:
        
@@ -171,10 +191,12 @@ def actualizar_pais(paises):
        except ValueError as e:
           print(e)
 
+    #Busca en la lista
     for pais in paises:
        
        if pais["nombre"].lower() == nombre_buscado.lower():
           
+          #Actualiza la población
           while True:
              try:
 
@@ -196,7 +218,8 @@ def actualizar_pais(paises):
              except ValueError as e:
                 print(e)
 
-
+          
+          #Actualiza la superficie
           while True:
              try:
                 superficie = input("Ingrese la nueva superficie: ")
@@ -217,6 +240,7 @@ def actualizar_pais(paises):
              except ValueError as e:
                 print(e)
 
+          #Guarda los cambios  
           pais["poblacion"] = poblacion_a_cargar
           pais["superficie"] = superficie_a_cargar
 
@@ -235,14 +259,17 @@ def actualizar_pais(paises):
    
 def buscar_pais(paises):
    
+   #Se solicita el nombre o parte del nombre del pais a buscar
    nombre_buscar = input("Ingresa el nombre del pais que desea buscar: ").strip()
 
+    #Validación que no puede estar vacio
    if not nombre_buscar:
       print("Error: el nombre no puede estar vacio")
       return
     
    encontrados = []
    
+   #Recorre la lista de paises buscanod coincidencias parciales
    for pais in paises:
       
       if nombre_buscar.lower() in pais["nombre"].lower():
@@ -276,6 +303,7 @@ def filtrar_por_continente(paises):
    
    encontrados = []
 
+   #Filtra por los paises que coinciden con el continente ingresado
    for pais in paises:
       
       if pais["continente"].lower() == continente_buscar.lower():
@@ -300,6 +328,7 @@ def filtrar_por_continente(paises):
 
 def filtrar_por_poblacion(paises):
 
+    #Se solicita rango minimo y maximo de población
     while True:
        try:
           minimo = input("Ingrese población minima: ").strip()
@@ -311,6 +340,7 @@ def filtrar_por_poblacion(paises):
           if not minimo.isdigit() or not maximo.isdigit():
              raise ValueError("Debe ingresar numeros enteros")
           
+          #Conversión a enteros
           minimo_a_cargar = int(minimo)
           maximo_a_cargar = int(maximo)
 
