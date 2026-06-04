@@ -228,11 +228,39 @@ def actualizar_pais(paises):
     print("No se encontro el pais")
 
              
-
+# --------------------------------------------
+# FUNCION 5: Buscar un pais
+# --------------------------------------------
             
    
-def buscar_pais():
-   pass
+def buscar_pais(paises):
+   
+   nombre_buscar = input("Ingresa el nombre del pais que desea buscar: ").strip()
+
+   if not nombre_buscar:
+      print("Error: el nombre no puede estar vacio")
+      return
+    
+   encontrados = []
+   
+   for pais in paises:
+      
+      if nombre_buscar.lower() in pais["nombre"].lower():
+         encontrados.append(pais)
+
+   if len(encontrados) == 0:
+      print("Error: no se encontraron paises con ese nombre")
+      return
+   
+   print("------------ RESULTADOS ------------")
+   
+   for pais in encontrados:
+      print(f"Nombre: {pais['nombre']}")
+      print(f"Población: {pais['poblacion']}")
+      print(f"Superficies: {pais['superficie']}")
+      print(f"Continente: {pais['continente']}")
+
+   
 
 def filtrar_por_continente():
    pass
