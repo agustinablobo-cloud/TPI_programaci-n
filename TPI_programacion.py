@@ -61,6 +61,9 @@ def guardar_paises(nombre_archivo, paises):
              pais["superficie"],
              pais["continente"]
           ])
+# --------------------------------------------
+# FUNCION 3: Agregar pais al CSV
+# --------------------------------------------
 
 def agregar_pais(paises):
     
@@ -70,11 +73,11 @@ def agregar_pais(paises):
             nombre = input("Ingrese el nombre del pais: ").strip()
 
             if not nombre:
-                raise ValueError("Error: el nombre no puede estar vacio")
+                raise ValueError("El nombre no puede estar vacio")
         
             for pais in paises:
              if pais["nombre"].lower() == nombre.lower():
-                raise ValueError("Error: el pais ya existe")
+                raise ValueError("El pais ya existe")
            
             break
        
@@ -86,15 +89,15 @@ def agregar_pais(paises):
           poblacion = input("Ingresa la poblacion: ")
 
           if poblacion == "":
-             raise ValueError("Error: no puede estar vacio")
+             raise ValueError("No puede estar vacio")
           
           if not poblacion.isdigit():
-             raise ValueError("Error: debe ingresar un numero entero")
+             raise ValueError("Debe ingresar un numero entero")
           
           poblacion_a_cargar = int(poblacion)
 
           if poblacion_a_cargar <= 0:
-             raise ValueError("Error: la poblacion debe ser mayor a 0")
+             raise ValueError("La poblacion debe ser mayor a 0")
           
           break
        
@@ -107,15 +110,15 @@ def agregar_pais(paises):
           superficie = input("Ingresa la superficie en km²: " )
 
           if superficie == "":
-             raise ValueError("Error: no puede estar vacio")
+             raise ValueError("No puede estar vacio")
           
           if not superficie.isdigit():
-             raise ValueError("Error: debe ingresar un numero entero")
+             raise ValueError("Debe ingresar un numero entero")
           
           superficie_a_cargar = int(superficie)
 
           if superficie_a_cargar <= 0:
-             raise ValueError("Error: la superficie debe ser mayor a 0")
+             raise ValueError("La superficie debe ser mayor a 0")
           
           break
        
@@ -128,7 +131,7 @@ def agregar_pais(paises):
             continente = input("Ingresa el continente: ").strip()
 
             if not continente:
-                raise ValueError("Error: el continente no puede estar vacio")
+                raise ValueError("El continente no puede estar vacio")
         
             
             break
@@ -149,11 +152,84 @@ def agregar_pais(paises):
 
     print("Pais agregado correctamente")
           
+# --------------------------------------------
+# FUNCION 4: Actualizar pais al CSV
+# --------------------------------------------
 
 
+def actualizar_pais(paises):
 
-def actualizar_pais():
-   pass
+    while True:
+       try:
+       
+        nombre_buscado = input("Inrgese el nombre del pais a actulizar: ").strip()
+
+        if not nombre_buscado:
+           raise ValueError("El nombre buscado no puede estar vacio")
+        
+        break
+       except ValueError as e:
+          print(e)
+
+    for pais in paises:
+       
+       if pais["nombre"].lower() == nombre_buscado.lower():
+          
+          while True:
+             try:
+
+                poblacion = input("Ingresa la nueva poblacion: ")
+
+                if not poblacion:
+                   raise ValueError("La poblacion no puede estar vacio")
+                
+                if not poblacion.isdigit():
+                   raise ValueError("Debe ingresar un numero entero")
+                
+                poblacion_a_cargar = int(poblacion)
+
+                if poblacion_a_cargar <= 0:
+                   raise ValueError("La poblacion debe ser mayor a 0")
+                
+                break
+             
+             except ValueError as e:
+                print(e)
+
+
+          while True:
+             try:
+                superficie = input("Ingrese la nueva superficie: ")
+
+                if not superficie:
+                   raise ValueError("Error: la superficie no puede estar vacio")
+                
+                if not superficie.isdigit():
+                   raise ValueError("Debe ingresar un numero entero")
+                
+                superficie_a_cargar = int(superficie)
+
+                if superficie_a_cargar <= 0:
+                   raise ValueError("La superficie debe ser mayor a 0")
+                
+                break
+             
+             except ValueError as e:
+                print(e)
+
+          pais["poblacion"] = poblacion_a_cargar
+          pais["superficie"] = superficie_a_cargar
+
+          guardar_paises("paises.csv",paises)
+
+          print("Pais actualizado correctamente")
+          return
+       
+    print("No se encontro el pais")
+
+             
+
+            
    
 def buscar_pais():
    pass
