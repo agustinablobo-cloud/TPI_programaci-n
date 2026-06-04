@@ -260,6 +260,10 @@ def buscar_pais(paises):
       print(f"Superficies: {pais['superficie']}")
       print(f"Continente: {pais['continente']}")
 
+
+# --------------------------------------------
+# FUNCION 6: Filtrar por continente
+# --------------------------------------------
    
 
 def filtrar_por_continente(paises):
@@ -289,10 +293,57 @@ def filtrar_por_continente(paises):
       print(f"Superficies: {pais['superficie']}")
       print(f"Continente: {pais['continente']}")
    
+# --------------------------------------------
+# FUNCION 7: Filtrar por población
+# --------------------------------------------
 
-def filtrar_por_poblacion():
-   pass
 
+def filtrar_por_poblacion(paises):
+
+    while True:
+       try:
+          minimo = input("Ingrese población minima: ").strip()
+          maximo = input("Ingrese población maxima: ").strip()
+
+          if not minimo or not maximo:
+             raise ValueError("Los valores no pueden estar vacios")
+            
+          if not minimo.isdigit() or not maximo.isdigit():
+             raise ValueError("Debe ingresar numeros enteros")
+          
+          minimo_a_cargar = int(minimo)
+          maximo_a_cargar = int(maximo)
+
+          if minimo_a_cargar < 0 or maximo_a_cargar < 0:
+             raise ValueError("Los valores no pueden ser menor a 0")
+          
+          if minimo_a_cargar > maximo_a_cargar:
+             raise ValueError("El minimo no puede ser mayor que al maximo")
+          
+          break
+       
+       except ValueError as e:
+          print(e)
+
+    encontrados = []
+
+    for pais in paises:
+       
+       if minimo_a_cargar <= pais["poblacion"] <= maximo_a_cargar:
+          encontrados.append(pais)
+
+    if len(encontrados) == 0:
+       print("Error: no se encontraron paises en ese rango de población")
+       return
+    
+    print("------------ RESULTADOS ------------")
+
+    for pais in encontrados:
+      print(f"Nombre: {pais['nombre']}")
+      print(f"Población: {pais['poblacion']}")
+      print(f"Superficies: {pais['superficie']}")
+      print(f"Continente: {pais['continente']}")
+   
 def filtrar_por_nombre():
    pass
 
