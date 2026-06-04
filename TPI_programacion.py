@@ -39,3 +39,36 @@ def cargar_paises(nombre_archivo):
         print("Ocurrió el siguiente error: ", type(e).__name__ )
 
     return paises
+
+def guardar_paises():
+    pass
+
+def agregar_pai():
+    pass
+
+def actualizar_pais():
+   pass
+   
+def buscar_pais():
+   pass
+
+def filtrar_por_continente():
+   pass
+
+def filtrar_por_poblacion():
+   pass
+
+def filtrar_por_nombre():
+   pass
+
+def ordenar_por_nombre():
+   pass
+
+def ordenar_por_poblacion():
+    pass
+
+def ordenar_por_superficie():
+    pass
+
+def mostrar_estadisticas():
+   pass
