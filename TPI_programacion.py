@@ -24,7 +24,7 @@ def cargar_paises(nombre_archivo):
                 "superficie": int(fila["superficie"]),
                 "continente": fila["continente"]
             }
-            paises.append(pais)
+            paises.append(pais)     
 
     except FileNotFoundError:
         print("Error: No se encontro el archivo")
@@ -40,10 +40,23 @@ def cargar_paises(nombre_archivo):
 
     return paises
 
-def guardar_paises():
-    pass
+def guardar_paises(nombre_archivo, paises):
 
-def agregar_pai():
+    with open(nombre_archivo, "w", newline="") as archivo:
+       
+       escritor = csv.writer(archivo)
+
+       escritor.writerow(["nombre", "poblacion", "superficie", "continente"])
+
+       for pais in paises:
+          escritor.writerow([
+             pais["nombre"],
+             pais["poblacion"],
+             pais["superficie"],
+             pais["continente"]
+          ])
+
+def agregar_pais():
     pass
 
 def actualizar_pais():
@@ -72,3 +85,8 @@ def ordenar_por_superficie():
 
 def mostrar_estadisticas():
    pass
+
+
+paises = cargar_paises("paises.csv")
+
+#Deberia estar el menu 
