@@ -364,3 +364,42 @@ paises = cargar_paises("paises.csv")
 
 
 #Deberia estar el menu 
+opcion = 0
+while opcion != "6":
+   try:
+      
+      print("------------------- MENU -------------------")
+      print("1. Agregar pais")
+      print("2. Actualizar pais")
+      print("3. Buscar pais")
+      print("4. Filtrar por continente")
+      print("5. Filtrar por población")
+      print("6. Salir")
+
+      opcion = input("Seleccione una opción (entre el 1 al 6): ").strip()
+
+      if opcion == "1":
+         agregar_pais(paises)
+
+      elif opcion == "2":
+         actualizar_pais(paises)
+
+      elif opcion == "3":
+         buscar_pais(paises)
+
+      elif opcion == "4":
+         filtrar_por_continente(paises)
+
+      elif opcion == "5":
+         filtrar_por_poblacion(paises)
+
+      elif opcion == "6":
+         print("Saliendo del sistema....")
+
+      else:
+         print("Opción fuera del rango 1-6")
+
+   except ValueError:
+      print("Ingresa un numero valido")
+      
+
