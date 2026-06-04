@@ -262,8 +262,33 @@ def buscar_pais(paises):
 
    
 
-def filtrar_por_continente():
-   pass
+def filtrar_por_continente(paises):
+   
+   continente_buscar = input("Ingresa el continente que desea buscar: ").strip()
+
+   if not continente_buscar:
+      print("Error: el continente no puede estar vacio")
+      return
+   
+   encontrados = []
+
+   for pais in paises:
+      
+      if pais["continente"].lower() == continente_buscar.lower():
+         encontrados.append(pais)
+
+   if len(encontrados) == 0:
+      print("Error: no se encontraron paises en ese continente")
+      return
+   
+   print("------------ RESULTADOS ------------")
+
+   for pais in encontrados:
+      print(f"Nombre: {pais['nombre']}")
+      print(f"Población: {pais['poblacion']}")
+      print(f"Superficies: {pais['superficie']}")
+      print(f"Continente: {pais['continente']}")
+   
 
 def filtrar_por_poblacion():
    pass
