@@ -16,21 +16,24 @@ def cargar_paises(nombre_archivo):
 
     try:
         #Se abre el archivo CSV en modo lectura
-        with open(nombre_archivo, "r", encoding="utf-8") as archivo:
+        with open(nombre_archivo, "r") as archivo:
 
-            #DictReader convierte cada fila en un diccionario
-            lector = csv.DictReader(archivo, delimiter=";")
+            lineas = archivo.readlines()
         
             #Recorre cada fila del archivo
-            for fila in lector:
+            for i in range(1, len(lineas)):
                 
-                #Se crea un diccionario por pais
+                linea = lineas[i].strip()
+                datos = linea.split(",") 
+
+                
+               
                 pais = {
-                    "nombre":     fila["nombre"],
+                    "nombre":     datos[0],
                     #Convierte a entero
-                    "poblacion":  int(fila["poblacion"]),
-                    "superficie": int(fila["superficie"]),
-                    "continente": fila["continente"]
+                    "poblacion":  int(datos[1]),
+                    "superficie": int(datos[2]),
+                    "continente": datos[3]
                 }
                 
                 #Agrega el pais a la lista
@@ -47,6 +50,7 @@ def cargar_paises(nombre_archivo):
 
     except Exception as e:
         print("Ocurrió el siguiente error: ", type(e).__name__ )
+        print(e)
 
     #Devuelve la lista de paises cargados
     return paises
@@ -59,21 +63,23 @@ def cargar_paises(nombre_archivo):
 def guardar_paises(nombre_archivo, paises):
 
     #Se abre el archivo en modo escritura (sobrescribe el archivo)
-    with open(nombre_archivo, "w", newline="") as archivo:
+    with open(nombre_archivo, "w") as archivo:
        
-       escritor = csv.writer(archivo)
+       
 
         #Se escribe encabezados
-       escritor.writerow(["nombre", "poblacion", "superficie", "continente"])
+       archivo.write("nombre,poblacion,superficie,continente")
 
         #Escribe cada pais como una fila
        for pais in paises:
-          escritor.writerow([
+          linea = (
              pais["nombre"],
              pais["poblacion"],
              pais["superficie"],
              pais["continente"]
-          ])
+          )
+
+       archivo.write(linea)
 # --------------------------------------------
 # FUNCION 3: Agregar pais al CSV
 # --------------------------------------------
@@ -391,6 +397,7 @@ def mostrar_estadisticas():
 
 
 paises = cargar_paises("paises.csv")
+
 
 
 #Deberia estar el menu 
