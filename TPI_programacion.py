@@ -33,7 +33,7 @@ def cargar_paises(nombre_archivo):
     except ValueError as e:
         print(f"ValueError: {e}")
 
-    except KeyError:
+    except IndexError:
         print("Error: Faltan columnas en el CSV")
 
     except Exception as e:
@@ -321,7 +321,7 @@ def filtrar_por_poblacion(paises):
             maximo_a_cargar = int(maximo)
 
             if minimo_a_cargar < 0 or maximo_a_cargar < 0:
-                raise ValueError("Los valores no pueden ser menor a 0")
+                raise ValueError("Los valores no pueden ser menores a 0")
 
             if minimo_a_cargar > maximo_a_cargar:
                 raise ValueError("El minimo no puede ser mayor que el maximo")
