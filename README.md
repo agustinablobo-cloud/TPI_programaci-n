@@ -123,12 +123,12 @@ Brasil,213993437,8515767,America
 
 ## Links
 
-- Video demostrativo: ___________________________
-- Documentación PDF: ___________________________
+- Video demostrativo:https://drive.google.com/file/d/1ZQ1lSfsm6YJLV-ZA5NZkGDmD5Lbh9TbM/view
+
+- Documentación PDF:https://docs.google.com/document/d/1uPostbizA9R97jEiBG2e0nsqBmv59yo_z_uxZWTANOo/edit?pli=1&tab=t.0
 
 ## Participación de los integrantes
 
-| Integrante | Tareas realizadas |
-|---|---|
-| _______________ | _______________ |
-| _______________ | _______________ |
+| Integrante | 
+| BLANCO, Agustina Brenda |
+| ALTAVISTA, Lucio Enrique |
