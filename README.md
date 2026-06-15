@@ -130,5 +130,5 @@ Brasil,213993437,8515767,America
 ## Participación de los integrantes
 
 | Integrante | 
-| BLANCO, Agustina Brenda |
+| LOBO, Agustina Brenda |
 | ALTAVISTA, Lucio Enrique |
